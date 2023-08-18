@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="main-container">
+	<div class="form-container">
+		<h2>Register new user</h2>
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				<div class="alert-box">
+					{{ messages[0] }} <a href="{{ url_for('auth.login') }}">Login Here</a>
+				</div>
+			{% endif %}
+		{% endwith %}
+		<form action="/register" name="register" method="POST" enctype="multipart/form-data">
+			<label for="f_name">First Name:</label>
+			<input type="text" name="f_name" id="f_name"  required>
+			<label for="l_name">last Name:</label>
+			<input type="text" name="l_name" id="l_name" required>
+			<label for="username">username:</label>
+			<input type="text" name="username" id="username" required>
+			<label for="email">email:</label>
+			<input type="email" name="email" id="email" required>
+			<label for="password">password:</label>
+			<input type="password" name="password" id="password" required>
+			<label for="file">Choose a profile picture:</label>
+			<input type="file" id="file" name="file" accept="image/png, image/jpeg">
+			<p>If you have already account?<a href="{{ url_for('auth.login') }}" class="already-user">&nbsp;click here</a></p>
+			<button class="btn" type="submit">Submit</button>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

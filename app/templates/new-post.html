@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{{  ckeditor.load(pkg_type="standard") }}
+
+
+<div class="form-container">
+	<form action="" method="POST">
+		<fieldset>
+			<legend>New Post</legend>
+
+			<label for="title">title</label>
+			<input type="text" id="title" name="title" placeholder="Title">
+
+			<label for="sub_title">sub title</label>
+			<input type="text" id="sub_title" name="sub_title" placeholder="Subtitle">
+
+			<label for="post_content" required>content</label>
+			{{ ckeditor.create(value=article_body) }}
+		</fieldset>
+		<button class="btn">post</button>
+	</form>
+</div>
+
+
+{% endblock %}
+
+{% block script %} 
+<script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+{% endblock %}

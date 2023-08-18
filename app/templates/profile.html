@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}Profile{% endblock %}
+
+
+{% block content %}
+
+<section class="main-user-container">
+	<div class="user-info-container">
+		{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					<div class="alert-box">
+						{{ messages[0] }}
+					</div>
+				{% endif %}
+		    {% endwith %}
+		<div class="user-info">
+			<h3>Dashboard</h3>
+			<ul>
+				<li>Full Name:<span> {{ current_user.f_name }} {{ current_user.l_name }}</span></li>
+				<li>Username:<span> {{ current_user.username }}</span></li>
+				<li>Email:<span> {{ current_user.email }}</span></li>
+			</ul> 
+			<div class="user-btn">
+				<a href="#" class="btn info-btn" id="reveal-btn">Edit Profile</a>
+				<a href="#" class="btn info-btn">Delete Account</a>
+				<a href="{{ url_for('main.new_post') }}" type="submit" class="btn info-btn">New Post</a>
+			</div>
+		</div>
+		<div class="profile_picture img-g">
+			{% if current_user.image_file %}
+			<img src="{{ url_for('static', filename='images/upload/' + current_user.image_file) }}" alt="Profile Image">
+			{% else %}
+			<p>No profile picture</p>
+			{% endif %}
+		</div>
+	</div>
+	<!-- update profile data -->
+	<div class="update-user-info hidden">
+		<h3>Edit Profile</h3>
+		<form action="" method="POST" enctype="multipart/form-data">
+			<label for="username">username</label>
+			<input type="text" name="username" id="username" placeholder="Enter new username" required>
+			<label for="email">email</label>
+			<input type="email" name="email" id="email" placeholder="enter your new email" required>
+			<label for="file">Choose a profile picture:</label>
+			<input type="file" id="file" name="file" accept="image/*">
+			<button class="btn info-btn">update</button>
+		</form>
+	</div>
+	<!-- user recent post data -->
+	<div class="recent-post-container">
+		<div class="post-data">
+			
+		</div>
+	</div>
+</section>
+
+{% endblock %}
+
+{% block script %}
+	<script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
