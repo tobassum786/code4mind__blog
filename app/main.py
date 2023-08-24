@@ -45,11 +45,11 @@ def profile():
         		old_file.remove(os.path.join(app.config['UPLOAD_DIR'], f_name))
 
         	db.session.delete(current_user.old_file)
-            random_hex = secrets.token_hex(8)
-            _, f_ext = os.path.splitext(image_file.filename)
-            f_name = random_hex + f_ext
-            image_file.save(os.path.join(app.config['UPLOAD_DIR'], f_name))
-        	
+        random_hex = secrets.token_hex(8)
+        _, f_ext = os.path.splitext(image_file.filename)
+        f_name = random_hex + f_ext
+        image_file.save(os.path.join(app.config['UPLOAD_DIR'], f_name))
+    	
 
         #commit new user profile image to database
         current_user.image_file = f_name
